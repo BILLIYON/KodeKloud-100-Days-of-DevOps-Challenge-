@@ -1,4 +1,3 @@
-````markdown
 # 🚀 100 Days of DevOps Challenge  
 
 This repository documents my journey through the **100 Days of DevOps Challenge (KodeKloud)**.  
@@ -7,6 +6,8 @@ Each day, I’ll log the task, solution, and key takeaways as I learn and practi
 ---
 
 ## 📅 Progress Log  
+
+---
 
 ### ✅ Day 1 – Linux User Setup with Non-Interactive Shell  
 **Task:**  
@@ -50,7 +51,7 @@ Non-interactive shells like `/sbin/nologin` or `/bin/false` prevent direct login
 ## 📌 Resources
 
 * [100 Days of DevOps Challenge – KodeKloud](https://kodekloud.com)
-* [My LinkedIn]([https://www.linkedin.com/in/YOUR-PROFILE](https://www.linkedin.com/in/john-abioye-4608001b9/))
+* [My LinkedIn](https://www.linkedin.com/in/john-abioye-4608001b9/)
 
 ---
 
@@ -63,7 +64,5 @@ Non-interactive shells like `/sbin/nologin` or `/bin/false` prevent direct login
 
 ```
 
----
 
-Would you like me to make this README more **flashy with badges (shields.io)** and a progress bar so it looks even more professional on GitHub?
-```
+
