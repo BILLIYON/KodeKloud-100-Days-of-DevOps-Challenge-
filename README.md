@@ -24,7 +24,23 @@ Non-interactive shells like `/sbin/nologin` or `/bin/false` prevent direct login
 
 ---
 
-### ⏳ Day 2 – \[Task Title Here]
+### ✅ Day 2 – Linux Temporary User with Expiry
+**Task:**  
+Today’s challenge in the 100 Days of DevOps was about user lifecycle management. 
+I created a developer account (siva) with a predefined expiry date to ensure temporary access for project needs.
+
+**Solution:**  
+```bash:
+sudo useradd -e 2024-03-28 siva
+sudo chage -l siva
+````
+
+**Takeaway:**
+Setting expiry dates on user accounts is a best practice in DevOps and system administration. It helps enforce principle of least privilege, reduces risks from forgotten accounts, and ensures smooth offboarding for temporary team members.
+
+---
+
+### ⏳ Day 3 – \[Task Title Here]
 
 **Task:**
 *Description of the task goes here.*
@@ -58,7 +74,7 @@ Non-interactive shells like `/sbin/nologin` or `/bin/false` prevent direct login
 ## 📊 Progress Tracker
 
 * [x] Day 1 – Linux User Setup with Non-Interactive Shell
-* [ ] Day 2 – …
+* [x] Day 2 – Linux Temporary User with Expiry
 * [ ] Day 3 – …
 * [ ] Day 100 – 🎉
 
