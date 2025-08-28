@@ -40,7 +40,24 @@ Setting expiry dates on user accounts is a best practice in DevOps and system ad
 
 ---
 
-### ⏳ Day 3 – \[Task Title Here]
+### ✅ Day 3 – Disable Direct SSH Root Login
+**Task:**  
+Following security audits at xFusionCorp Industries, the security team required disabling direct SSH root login on all app servers in the Stratos Datacenter.
+
+**Solution:**  
+- SSH’d into each app server (`stapp01`, `stapp02`, `stapp03`).
+- Edited `/etc/ssh/sshd_config`:
+  - Set `PermitRootLogin no`.
+- Restarted `sshd` service to apply changes.
+- Verified that direct root login was disabled, while normal users retained sudo access
+
+**Takeaway:**
+Direct root SSH access is a critical security risk. By disabling it, we enforce the principle of least privilege—ensuring admins log in as regular users first, and only escalate when necessary.
+
+
+---
+
+### ⏳ Day 4 – \[Task Title Here]
 
 **Task:**
 *Description of the task goes here.*
@@ -75,7 +92,10 @@ Setting expiry dates on user accounts is a best practice in DevOps and system ad
 
 * [x] Day 1 – Linux User Setup with Non-Interactive Shell
 * [x] Day 2 – Linux Temporary User with Expiry
-* [ ] Day 3 – …
+* [x] Day 3 – Disable Direct SSH Root Login
+* [ ] Day 4 -
+* [ ] Day 5 -
+* [ ] Day 6 -
 * [ ] Day 100 – 🎉
 
 ```
