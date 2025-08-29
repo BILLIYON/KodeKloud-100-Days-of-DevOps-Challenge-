@@ -57,7 +57,28 @@ Direct root SSH access is a critical security risk. By disabling it, we enforce 
 
 ---
 
-### ⏳ Day 4 – \[Task Title Here]
+### ✅ Day 4 – Script Execution Permissions
+**Task:**  
+A backup automation script (`xfusioncorp.sh`) had been distributed but wasn’t properly executable.
+
+**Solution:**  
+I used Linux file permissions (`chmod`) to ensure all users could run the script while keeping ownership intact.
+
+**Key Commands:**
+```bash
+ls -l /tmp/xfusioncorp.sh   # check current permissions
+chmod 755 /tmp/xfusioncorp.sh   # set proper executable rights
+```
+Permission after fix: -rwxr-xr-x 1
+
+**Takeaway:**
+Permissions are a critical part of Linux security.
+Scripts often need to be readable and executable across users, but not always writable.
+This was a small but essential step in automating and securing infrastructure.
+
+---
+
+### ⏳ Day 5 – \[Task Title Here]
 
 **Task:**
 *Description of the task goes here.*
@@ -93,7 +114,7 @@ Direct root SSH access is a critical security risk. By disabling it, we enforce 
 * [x] Day 1 – Linux User Setup with Non-Interactive Shell
 * [x] Day 2 – Linux Temporary User with Expiry
 * [x] Day 3 – Disable Direct SSH Root Login
-* [ ] Day 4 -
+* [x] Day 4 - Script Execution Permissions
 * [ ] Day 5 -
 * [ ] Day 6 -
 * [ ] Day 100 – 🎉
