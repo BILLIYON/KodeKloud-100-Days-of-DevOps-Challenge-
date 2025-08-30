@@ -78,7 +78,65 @@ This was a small but essential step in automating and securing infrastructure.
 
 ---
 
-### ⏳ Day 5 – \[Task Title Here]
+### ✅ Day 5 - SElinux Installation and Configuration
+
+**Task:**
+Following a security audit, the xFusionCorp Industries security team decided to strengthen server security with **SELinux**. For App Server 1 in the Stratos Datacenter, I was asked to:
+
+* Install the required SELinux packages.
+* Permanently disable SELinux (until further configuration is ready).
+* Ensure no reboot is performed immediately (changes should take effect after scheduled maintenance).
+
+**Solution:**
+
+1. **Install SELinux packages**
+
+```bash
+# CentOS/RHEL
+sudo yum install -y selinux-policy selinux-policy-targeted policycoreutils
+
+# Ubuntu/Debian
+sudo apt update
+sudo apt install -y selinux-basics selinux-policy-default auditd
+```
+
+2. **Edit SELinux config**
+
+```bash
+sudo vi /etc/selinux/config
+```
+
+Change:
+
+```
+SELINUX=enforcing
+```
+
+to:
+
+```
+SELINUX=disabled
+```
+
+3. **Verify changes**
+
+```bash
+grep SELINUX= /etc/selinux/config
+# Output:
+SELINUX=disabled
+```
+
+No reboot required now. After the scheduled reboot, SELinux will be permanently disabled. ✅
+
+**Takeaway:**
+
+* SELinux (Security-Enhanced Linux) enforces fine-grained access control, but sometimes needs to be temporarily disabled for system/application compatibility.
+* Understanding how to configure SELinux is critical in system hardening and troubleshooting.
+* Security is a balance: sometimes you prepare the environment first (packages installed) before enabling strict policies.
+
+---
+
+### ⏳ Day 6 – \[Task Title Here]
 
 **Task:**
 *Description of the task goes here.*
@@ -115,8 +173,10 @@ This was a small but essential step in automating and securing infrastructure.
 * [x] Day 2 – Linux Temporary User with Expiry
 * [x] Day 3 – Disable Direct SSH Root Login
 * [x] Day 4 - Script Execution Permissions
-* [ ] Day 5 -
+* [x] Day 5 - SElinux Installation and Configuration
 * [ ] Day 6 -
+* [ ] Day 7 -
+* [ ] Day 8 -
 * [ ] Day 100 – 🎉
 
 ```
