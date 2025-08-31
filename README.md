@@ -136,7 +136,27 @@ No reboot required now. After the scheduled reboot, SELinux will be permanently 
 
 ---
 
-### ⏳ Day 6 – \[Task Title Here]
+ ### ✅ Day 6 - Create a Cron Job
+
+**Task:** Automating with Cron Jobs
+On all Nautilus app servers in the Stratos Datacenter:
+1. Install the **cronie** package (it provides the `crond` service for managing cron jobs).
+2. Start the **crond** service so scheduled tasks can run.
+3. Add a cron job for the **root user** that runs **every 5 minutes** and writes “hello” into `/tmp/cron_text`.
+
+**Expected outcome:** Every 5 minutes, the file `/tmp/cron_text` will be overwritten with the word `hello`.
+
+**Takeaway:**
+In real-world DevOps, cron jobs are the backbone of automation:
+* Scheduling database backups
+* Rotating logs
+* Syncing data between servers
+* Running monitoring/health check scripts
+Instead of relying on humans to remember, the system does the job *reliably* and *on time*.
+
+---
+
+### ⏳ Day 7 – \[Task Title Here]
 
 **Task:**
 *Description of the task goes here.*
@@ -174,7 +194,7 @@ No reboot required now. After the scheduled reboot, SELinux will be permanently 
 * [x] Day 3 – Disable Direct SSH Root Login
 * [x] Day 4 - Script Execution Permissions
 * [x] Day 5 - SElinux Installation and Configuration
-* [ ] Day 6 -
+* [ ] Day 6 - Create a Cron Job
 * [ ] Day 7 -
 * [ ] Day 8 -
 * [ ] Day 100 – 🎉
