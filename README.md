@@ -156,7 +156,52 @@ Instead of relying on humans to remember, the system does the job *reliably* and
 
 ---
 
-### ⏳ Day 7 – \[Task Title Here]
+### ✅ Day 7-  Linux SSH Authentication
+
+**Task:**
+xFusionCorp Industries required secure automation scripts to run on all application servers.
+To make this possible, the `thor` user on the **jump host** needed **password-less SSH access** to all app servers via their respective sudo users (`tony`, `steve`, `banner`).
+
+
+**Solution:**
+1. **Generated SSH keys** for `thor` on the jump host:
+
+   ```bash
+   ssh-keygen -t rsa -b 4096
+   ```
+
+2. **Copied public keys** to each server’s sudo user:
+
+   ```bash
+   ssh-copy-id tony@stapp01
+   ssh-copy-id steve@stapp02
+   ssh-copy-id banner@stapp03
+   ```
+
+3. **Verified access** with simple logins:
+
+   ```bash
+   ssh tony@stapp01
+   ```
+
+ No password prompt, only key-based authentication.
+
+4. (Optional) **Configured SSH aliases** in `~/.ssh/config` for easier server management.
+
+
+**Takeaway**
+Password-less SSH with key-based authentication is a **foundational DevOps skill**.
+It:
+
+* Enables **automation** (scripts, CI/CD, Ansible, etc.) without manual intervention.
+* Enhances **security** (no password leaks).
+* Improves **efficiency** in multi-server environments.
+
+This small but critical setup is what makes large-scale operations **seamless and secure**.
+
+---
+
+### ⏳ Day 8 – \[Task Title Here]
 
 **Task:**
 *Description of the task goes here.*
@@ -195,7 +240,7 @@ Instead of relying on humans to remember, the system does the job *reliably* and
 * [x] Day 4 - Script Execution Permissions
 * [x] Day 5 - SElinux Installation and Configuration
 * [ ] Day 6 - Create a Cron Job
-* [ ] Day 7 -
+* [ ] Day 7 - Day 7-  Linux SSH Authentication
 * [ ] Day 8 -
 * [ ] Day 100 – 🎉
 
