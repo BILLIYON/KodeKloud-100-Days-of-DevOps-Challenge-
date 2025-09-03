@@ -225,7 +225,71 @@ Ansible’s simplicity (agentless, minimal setup) makes it ideal for quick confi
 
 ---
 
-### ⏳ Day 9 – \[Task Title Here]
+## ✅ Day 9: MariaDB Troubleshooting
+
+**Task**
+The Nautilus production app couldn’t connect to the database. On investigation, the `mariadb` service was **down** on the DB server (`stdb01`).
+The goal: **bring MariaDB back up and running.**
+
+**Steps Taken**
+1. **Tried restarting the service**
+
+   ```bash
+   sudo systemctl start mariadb
+   ```
+
+   → Failed with error.
+
+2. **Checked logs**
+
+   ```bash
+   sudo systemctl status mariadb -l
+   sudo journalctl -xeu mariadb
+   ```
+
+   Found errors like:
+
+   ```
+   InnoDB: Operating system error number 13
+   InnoDB: The error means mysqld does not have the access rights to the directory.
+   Cannot open datafile './ibtmp1'
+   ```
+
+3. **Diagnosed the issue**
+
+   * Error 13 = **Permission Denied**.
+   * Checked ownership of the data directory:
+
+     ```bash
+     ls -ld /var/lib/mysql
+     ```
+
+     Output showed it was owned by `root:mysql` (wrong).
+
+4. **Fixed ownership and permissions**
+
+   ```bash
+   sudo chown -R mysql:mysql /var/lib/mysql
+   sudo rm -f /var/lib/mysql/ibtmp1   # cleanup temp file
+   ```
+
+5. **Restarted MariaDB**
+
+   ```bash
+   sudo systemctl restart mariadb
+   ```
+Success → Service is active and running.
+
+**Takeaway**
+
+* Always check **logs first** (`systemctl status`, `journalctl`) — they tell the story.
+* Error `13 (Permission Denied)` almost always means **ownership or SELinux issues**.
+* MariaDB requires `/var/lib/mysql` and all contents to be owned by the `mysql` user.
+* Real-world troubleshooting is about breaking the problem into **clues → diagnosis → fix**.
+
+---
+
+### ⏳ Day 10 – \[Task Title Here]
 
 **Task:**
 *Description of the task goes here.*
@@ -263,10 +327,10 @@ Ansible’s simplicity (agentless, minimal setup) makes it ideal for quick confi
 * [x] Day 3 – Disable Direct SSH Root Login
 * [x] Day 4 - Script Execution Permissions
 * [x] Day 5 - SElinux Installation and Configuration
-* [ ] Day 6 - Create a Cron Job
-* [ ] Day 7 - Linux SSH Authentication
-* [ ] Day 8 - Installing Ansible for Automation
-* [ ] Day 9 -
+* [x] Day 6 - Create a Cron Job
+* [x] Day 7 - Linux SSH Authentication
+* [x] Day 8 - Installing Ansible for Automation
+* [x] Day 9 - MariaDB Troubleshooting
 * [ ] Day 10 -
 * [ ] Day 100 – 🎉
 
