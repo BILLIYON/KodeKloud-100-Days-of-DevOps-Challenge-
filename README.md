@@ -200,8 +200,31 @@ It:
 This small but critical setup is what makes large-scale operations **seamless and secure**.
 
 ---
+## Day 8 - Installing Ansible for Automation
 
-### ⏳ Day 8 – \[Task Title Here]
+**Task:**
+Set up Ansible on the Jump Host as the control node by installing version 4.10.0 with pip3, ensuring global accessibility.
+
+**Steps Taken:**  
+1. Installed `python3-pip` on the Jump Host.  
+
+2. Installed Ansible 4.10.0 via pip3:
+
+  ```bash
+  sudo pip3 install ansible==4.10.0
+  ```
+Verified installation:
+  ```
+ansible --version
+which ansible
+  ```
+Output confirmed Ansible is installed globally.
+
+**Key Takeaway:**
+Ansible’s simplicity (agentless, minimal setup) makes it ideal for quick configuration management and automation testing across servers.
+---
+
+### ⏳ Day 9 – \[Task Title Here]
 
 **Task:**
 *Description of the task goes here.*
@@ -240,8 +263,10 @@ This small but critical setup is what makes large-scale operations **seamless an
 * [x] Day 4 - Script Execution Permissions
 * [x] Day 5 - SElinux Installation and Configuration
 * [ ] Day 6 - Create a Cron Job
-* [ ] Day 7 - Day 7-  Linux SSH Authentication
-* [ ] Day 8 -
+* [ ] Day 7 - Linux SSH Authentication
+* [ ] Day 8 - Installing Ansible for Automation
+* [ ] Day 9 -
+* [ ] Day 10 -
 * [ ] Day 100 – 🎉
 
 ```
