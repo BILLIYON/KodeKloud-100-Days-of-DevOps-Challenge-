@@ -200,7 +200,7 @@ It:
 This small but critical setup is what makes large-scale operations **seamless and secure**.
 
 ---
-## Day 8 - Installing Ansible for Automation
+## ✅ Day 8 - Installing Ansible for Automation
 
 **Task:**
 Set up Ansible on the Jump Host as the control node by installing version 4.10.0 with pip3, ensuring global accessibility.
@@ -222,6 +222,7 @@ Output confirmed Ansible is installed globally.
 
 **Key Takeaway:**
 Ansible’s simplicity (agentless, minimal setup) makes it ideal for quick configuration management and automation testing across servers.
+
 ---
 
 ### ⏳ Day 9 – \[Task Title Here]
