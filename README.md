@@ -288,8 +288,45 @@ Success → Service is active and running.
 * Real-world troubleshooting is about breaking the problem into **clues → diagnosis → fix**.
 
 ---
+## ✅ Day 10 - Linux Bash Scripts
 
-### ⏳ Day 10 – \[Task Title Here]
+**Task:**  
+Create a bash script (`/scripts/beta_backup.sh`) on App Server 3 that:
+- Archives the `/var/www/html/beta` directory into `xfusioncorp_beta.zip`.
+- Stores the archive in `/backup/`.
+- Copies the archive to Nautilus Backup Server in `/backup/`.
+- Works with passwordless SSH (no manual password prompt).
+- Runs without sudo.
+
+**Solution Steps:**  
+1. Installed `zip` package.  
+2. Created `/scripts` and `/backup` directories.  
+3. Configured SSH key-based authentication from App Server 3 → Backup Server.  
+4. Wrote and tested the script:
+
+```bash
+#!/bin/bash
+SRC_DIR="/var/www/html/beta"
+BACKUP_NAME="xfusioncorp_beta.zip"
+LOCAL_BACKUP="/backup/$BACKUP_NAME"
+REMOTE_USER="clint"
+REMOTE_HOST="stbkp01"
+REMOTE_DIR="/backup/"
+
+zip -r $LOCAL_BACKUP $SRC_DIR
+scp $LOCAL_BACKUP ${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_DIR}
+```
+Made it executable:
+```
+chmod +x /scripts/beta_backup.sh
+```
+
+**Key Learning:**
+Automating routine backup tasks with Bash + passwordless SSH reduces human error and ensures consistency. This forms the foundation for more advanced DevOps pipelines using Ansible, Jenkins, or cron jobs.
+
+---
+
+### ⏳ Day 11 – \[Task Title Here]
 
 **Task:**
 *Description of the task goes here.*
@@ -331,7 +368,13 @@ Success → Service is active and running.
 * [x] Day 7 - Linux SSH Authentication
 * [x] Day 8 - Installing Ansible for Automation
 * [x] Day 9 - MariaDB Troubleshooting
-* [ ] Day 10 -
+* [ ] Day 10 - Linux Bash Scripts
+* [ ] Day 11 -
+* [ ] Day 13 -
+* [ ] Day 14 -
+* [ ] Day 15 -
+* [ ] Day 16 -
+* [ ] Day 17 -
 * [ ] Day 100 – 🎉
 
 ```
