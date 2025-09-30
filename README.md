@@ -326,7 +326,55 @@ Automating routine backup tasks with Bash + passwordless SSH reduces human error
 
 ---
 
-### ⏳ Day 11 – \[Task Title Here]
+## ✅ Day 11 – Install and Configure Tomcat Server
+
+**Task:**
+The Nautilus Dev team built a Java-based beta application. My job was to:
+Install Tomcat on App Server 2.
+Configure it to run on port 6400.
+Deploy the provided ROOT.war file so the app loads directly at the base URL (/).
+Validate deployment with curl http://stapp02:6400.
+
+
+**Solution:**
+
+**Install Tomcat**
+```
+sudo yum install -y tomcat    # RHEL/CentOS
+```
+
+**Change Tomcat default port**
+```
+sudo vi /etc/tomcat/server.xml
+```
+**Update connector line:**
+**<Connector port="6400" protocol="HTTP/1.1" connectionTimeout="20000" redirectPort="8443" />**
+
+**Deploy WAR file**
+```
+scp /tmp/ROOT.war tony@stapp02:/tmp/
+sudo mv /tmp/ROOT.war /var/lib/tomcat/webapps/
+```
+
+**Restart Tomcat**
+sudo systemctl restart tomcat
+
+**Test**
+```
+curl http://stapp02:6400
+```
+
+
+**Takeaway:**
+This task reinforced:
+How application servers like Tomcat host apps.
+The importance of port reconfiguration for custom deployments.
+Why naming the WAR file ROOT.war ensures deployment at the base URL without extra paths
+
+
+---
+
+### ⏳ Day 12 – \[Task Title Here]
 
 **Task:**
 *Description of the task goes here.*
@@ -369,7 +417,7 @@ Automating routine backup tasks with Bash + passwordless SSH reduces human error
 * [x] Day 8 - Installing Ansible for Automation
 * [x] Day 9 - MariaDB Troubleshooting
 * [ ] Day 10 - Linux Bash Scripts
-* [ ] Day 11 -
+* [ ] Day 11 - Install and Configure Tomcat Server
 * [ ] Day 13 -
 * [ ] Day 14 -
 * [ ] Day 15 -
