@@ -371,10 +371,44 @@ How application servers like Tomcat host apps.
 The importance of port reconfiguration for custom deployments.
 Why naming the WAR file ROOT.war ensures deployment at the base URL without extra paths
 
+---
+
+## ✅ Day 12 - Linux Network Services
+
+**Task:**
+The monitoring tool reported that an Apache service was unreachable on port 8082 in Stratos Datacenter. My goal was to investigate why and restore accessibility from the Jump Host.
+
+**Solution:**
+Checked Apache service → Found it had failed to start.
+
+Ran netstat -tulnp → Discovered Sendmail was already bound to port 8082 (PID 446).
+
+✅ Killed the conflicting process.
+
+✅ Restarted Apache successfully.
+
+Verified locally with curl localhost:8082 → Worked fine.
+
+Tested from Jump Host → Still unreachable.
+
+Inspected firewall (iptables -L -n) → Default rules were rejecting all non-22 traffic.
+
+✅ Added a rule to allow inbound traffic on port 8082.
+
+✅ Confirmed remote access worked with curl http://stapp01:8082.
+
+
+**Takeaway:**
+Troubleshooting connectivity issues requires checking each layer systematically:
+- Service status (systemctl status)
+- Port binding conflicts (netstat -tulnp)
+- Local connectivity (curl localhost)
+- Firewall/network rules (iptables, firewalld, security groups).
+This task was a great reminder that in real-world systems, problems are often multi-layered. Debugging is about patience, process, and persistence.
 
 ---
 
-### ⏳ Day 12 – \[Task Title Here]
+### ⏳ Day 13 – \[Task Title Here]
 
 **Task:**
 *Description of the task goes here.*
@@ -416,8 +450,8 @@ Why naming the WAR file ROOT.war ensures deployment at the base URL without extr
 * [x] Day 7 - Linux SSH Authentication
 * [x] Day 8 - Installing Ansible for Automation
 * [x] Day 9 - MariaDB Troubleshooting
-* [ ] Day 10 - Linux Bash Scripts
-* [ ] Day 11 - Install and Configure Tomcat Server
+* [x] Day 10 - Linux Bash Scripts
+* [x] Day 11 - Install and Configure Tomcat Server
 * [ ] Day 13 -
 * [ ] Day 14 -
 * [ ] Day 15 -
