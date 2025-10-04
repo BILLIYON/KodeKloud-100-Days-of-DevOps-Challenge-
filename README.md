@@ -408,7 +408,62 @@ This task was a great reminder that in real-world systems, problems are often mu
 
 ---
 
-### ⏳ Day 13 – \[Task Title Here]
+## ✅ Day 13 – IPtables Installation and Configuration
+
+**Task:**
+Today’s challenge focused on strengthening network security by configuring firewall rules using iptables across app servers.
+*Scenario:*
+Our web application runs on port 8083, but it was open to all inbound traffic, a potential security risk flagged by the team. The goal was to:
+
+Install and configure iptables on all app servers.
+
+Allow access to port 8083 only from the Load Balancer (LBR) host.
+
+Ensure the rules persist after reboot.
+
+**Solution:**
+
+```bash
+# Installed iptables and its services
+
+sudo yum install -y iptables iptables-services
+
+sudo systemctl enable iptables
+
+sudo systemctl start iptables
+
+# Configured rules
+# Instead of simply appending rules (which might be overridden by existing REJECT rules), I inserted them at the top of the INPUT chain for proper priority:
+
+sudo iptables -I INPUT 1 -p tcp --dport 8083 -s 172.16.238.14 -j ACCEPT
+
+sudo iptables -I INPUT 2 -p tcp --dport 8083 -j DROP
+
+Saved and verified configuration
+
+sudo service iptables save
+
+sudo iptables -L -n -v | grep 8083
+```
+
+**Takeaway:**
+Rule order matters in iptables!
+
+ If an ACCEPT or DROP rule sits below a general REJECT rule, it’ll never be executed. Always insert (-I) important rules before restrictive ones.
+
+Ensuring persistence via service iptables save or /etc/sysconfig/iptables is critical to maintain security after a reboot.
+
+---
+
+## 🏁 Goals
+
+* Stay consistent for 100 days.
+* Gain hands-on experience across Linux, Docker, Kubernetes, CI/CD, Terraform, Ansible, Cloud, and more.
+* Share progress daily on LinkedIn and GitHub.
+
+---
+
+### ⏳ Day 14 – \[Task Title Here]
 
 **Task:**
 *Description of the task goes here.*
@@ -452,7 +507,7 @@ This task was a great reminder that in real-world systems, problems are often mu
 * [x] Day 9 - MariaDB Troubleshooting
 * [x] Day 10 - Linux Bash Scripts
 * [x] Day 11 - Install and Configure Tomcat Server
-* [ ] Day 13 -
+* [x] Day 13 - IPtables Installation and Configuration
 * [ ] Day 14 -
 * [ ] Day 15 -
 * [ ] Day 16 -
