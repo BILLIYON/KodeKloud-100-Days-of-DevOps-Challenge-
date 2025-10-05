@@ -454,16 +454,69 @@ Rule order matters in iptables!
 Ensuring persistence via service iptables save or /etc/sysconfig/iptables is critical to maintain security after a reboot.
 
 ---
+## ✅ Day 14 – Linux Process Troubleshooting
 
-## 🏁 Goals
+**Task:**
+The production support team of xFusionCorp Industries reported that Apache service was unavailable on one of the app servers.
 
-* Stay consistent for 100 days.
-* Gain hands-on experience across Linux, Docker, Kubernetes, CI/CD, Terraform, Ansible, Cloud, and more.
-* Share progress daily on LinkedIn and GitHub.
+My job was to:
+
+Identify which app host had the issue.
+
+Fix the Apache service so it runs on all app servers.
+
+Ensure Apache listens on port 3003 across all servers.
+
+
+
+**Solution:**
+
+```bash
+# Checked Apache status on each app server:
+
+sudo systemctl status httpd
+
+# Found that on one host, Apache failed to start with the error:
+
+# (98)Address already in use: make_sock: could not bind to address [::]:3003
+
+# Diagnosed the issue — port 3003 was already in use by another process.
+
+# Used:
+
+sudo netstat -tulnp | grep 3003
+
+# Identified the conflicting process and killed it:
+
+sudo kill -9 <PID>
+
+# Restarted Apache and enabled it on boot:
+
+sudo systemctl start httpd
+
+sudo systemctl enable httpd
+
+# Verified success:
+
+sudo netstat -tulnp | grep httpd
+
+curl http://localhost:3003
+
+# Apache was now up and listening properly on port 3003 ✅
+
+```
+
+**Takeaway:**
+
+- Troubleshooting service failures often comes down to reading the error logs carefully.
+
+- In this case, the clue  “Address already in use”  pointed directly to the root cause.
+
+- Always check for port conflicts before restarting or reinstalling services. Sometimes, the simplest fix is freeing up a busy port.
 
 ---
 
-### ⏳ Day 14 – \[Task Title Here]
+### ⏳ Day 15 – \[Task Title Here]
 
 **Task:**
 *Description of the task goes here.*
@@ -508,7 +561,7 @@ Ensuring persistence via service iptables save or /etc/sysconfig/iptables is cri
 * [x] Day 10 - Linux Bash Scripts
 * [x] Day 11 - Install and Configure Tomcat Server
 * [x] Day 13 - IPtables Installation and Configuration
-* [ ] Day 14 -
+* [x] Day 14 - Linux Process Troubleshooting
 * [ ] Day 15 -
 * [ ] Day 16 -
 * [ ] Day 17 -
