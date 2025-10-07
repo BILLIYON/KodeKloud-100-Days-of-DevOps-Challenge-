@@ -514,6 +514,68 @@ curl http://localhost:3003
 
 - Always check for port conflicts before restarting or reinstalling services. Sometimes, the simplest fix is freeing up a busy port.
 
+
+---
+
+### ⏳ Day 15 – Setup SSL for Nginx
+
+**Task:**
+ Deploy and secure an Nginx web server with a self-signed SSL certificate on App Server 3.
+
+ Steps included installing Nginx, moving provided certificate/key files, configuring SSL in Nginx, and verifying access over HTTPS.
+
+
+
+**Solution:**
+
+```bash
+
+# 1. Switched to the root user to gain required privileges:
+
+   ```bash
+   sudo su -
+   ```
+
+# 2. Created the SSL directory and moved the certificate files:
+
+   ```bash
+   mkdir -p /etc/nginx/ssl
+   mv /tmp/nautilus.crt /etc/nginx/ssl/
+   mv /tmp/nautilus.key /etc/nginx/ssl/
+   ```
+
+# 3. Updated the Nginx configuration file `/etc/nginx/nginx.conf` with an SSL server block:
+
+   ```nginx
+   server {
+       listen 443 ssl;
+       server_name localhost;
+
+       ssl_certificate /etc/nginx/ssl/nautilus.crt;
+       ssl_certificate_key /etc/nginx/ssl/nautilus.key;
+
+       root /usr/share/nginx/html;
+       index index.html;
+   }
+   ```
+
+# 4. Restarted and enabled Nginx:
+
+   ```bash
+   systemctl restart nginx
+   systemctl enable nginx
+   ```
+
+# 5. Verified SSL setup using:
+
+   ```bash
+   curl -Ik https://localhost
+   ```
+```
+
+**Takeaway:**
+*Short reflection or lesson learned.*
+
 ---
 
 ### ⏳ Day 15 – \[Task Title Here]
