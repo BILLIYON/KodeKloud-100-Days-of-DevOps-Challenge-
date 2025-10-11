@@ -657,19 +657,55 @@ curl -I http://stlb01
 
 ---
 
-### ⏳ Day 17 – \[Task Title Here]
+## ✅ Day 17 – Install and Configure PostgreSQL
 
 **Task:**
-*Description of the task goes here.*
+The Nautilus application team is preparing to deploy a new app that requires a PostgreSQL backend.
+
+ My job was to configure the database environment on the Nautilus DB server by:
+
+Creating a new PostgreSQL user kodekloud_rin with password ksH85UJjhb.
+
+Creating a new database kodekloud_db5.
+
+Granting full privileges on the database to the new user.
+
 
 **Solution:**
 
 ```bash
-# commands or configuration used
+#Since PostgreSQL was already installed, I connected as the postgres system user and used the psql shell to perform the configurations:
+
+sudo su - postgres
+
+psql
+
+#Inside the shell, I ran:
+
+CREATE USER kodekloud_rin WITH PASSWORD 'ksH85UJjhb';
+
+CREATE DATABASE kodekloud_db5;
+
+GRANT ALL PRIVILEGES ON DATABASE kodekloud_db5 TO kodekloud_rin;
+
+#Then verified:
+
+\du
+
+\l
+
+#Finally exited:
+
+\q
+
+#exit
+
 ```
 
 **Takeaway:**
-*Short reflection or lesson learned.*
+- This exercise reinforced the fundamentals of PostgreSQL user management and database access control.
+
+- In real-world environments, properly isolating app credentials and granting scoped permissions strengthens database security and operational hygiene; both are vital for DevOps and production reliability.
 
 ---
 
@@ -705,7 +741,9 @@ curl -I http://stlb01
 * [x] Day 14 - Linux Process Troubleshooting
 * [x] Day 15 - Setup SSL for Nginx
 * [x] Day 16 - Installing and Configuring Nginx as a Load Balancer
-* [ ] Day 17 -
+* [ ] Day 17 - Install and Configure PostgreSQL
+* [ ] Day 19 -
+* [ ] Day 20 -
 * [ ] Day 100 – 🎉
 
 ```
