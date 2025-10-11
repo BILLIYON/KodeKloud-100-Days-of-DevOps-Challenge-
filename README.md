@@ -517,7 +517,7 @@ curl http://localhost:3003
 
 ---
 
-### ⏳ Day 15 – Setup SSL for Nginx
+## ✅ Day 15 – Setup SSL for Nginx
 
 **Task:**
  Deploy and secure an Nginx web server with a self-signed SSL certificate on App Server 3.
@@ -530,13 +530,13 @@ curl http://localhost:3003
 
 ```bash
 
-# 1. Switched to the root user to gain required privileges:
+#1. Switched to the root user to gain required privileges:
 
    ```bash
    sudo su -
    ```
 
-# 2. Created the SSL directory and moved the certificate files:
+#2. Created the SSL directory and moved the certificate files:
 
    ```bash
    mkdir -p /etc/nginx/ssl
@@ -544,7 +544,7 @@ curl http://localhost:3003
    mv /tmp/nautilus.key /etc/nginx/ssl/
    ```
 
-# 3. Updated the Nginx configuration file `/etc/nginx/nginx.conf` with an SSL server block:
+#3. Updated the Nginx configuration file `/etc/nginx/nginx.conf` with an SSL server block:
 
    ```nginx
    server {
@@ -559,26 +559,105 @@ curl http://localhost:3003
    }
    ```
 
-# 4. Restarted and enabled Nginx:
+#4. Restarted and enabled Nginx:
 
    ```bash
    systemctl restart nginx
    systemctl enable nginx
    ```
 
-# 5. Verified SSL setup using:
+#5. Verified SSL setup using:
 
    ```bash
    curl -Ik https://localhost
+
    ```
 ```
-
+```
 **Takeaway:**
-*Short reflection or lesson learned.*
+ - This task reinforced how simple yet essential SSL configuration is for securing web traffic.
+ - Understanding Nginx’s structure and SSL directives builds the foundation for advanced HTTPS, load balancing, and reverse proxy setups.
 
 ---
 
-### ⏳ Day 15 – \[Task Title Here]
+
+## ✅ Day 16 – Installing and Configuring Nginx as a Load Balancer
+
+**Task:**
+The Nautilus production team noticed a drop in performance due to rising web traffic. To ensure high availability and reliability, the task was to configure an Nginx Load Balancer (LBR) that distributes requests evenly across three backend application servers.
+
+**Solution:**
+
+```bash
+
+#Installed Nginx on the LBR server:
+
+sudo yum install -y nginx
+
+#Verified Apache was running on all app servers to identify their listening ports:
+
+sudo ss -tulnp | grep httpd
+
+#Confirmed port 3000 was in use across all app servers (stapp01, stapp02, stapp03).
+
+#Updated the main Nginx configuration file (/etc/nginx/nginx.conf) with an upstream block:
+
+upstream app_servers {
+
+    server stapp01:3000;
+
+    server stapp02:3000;
+
+    server stapp03:3000;
+
+}
+
+
+
+server {
+
+    listen 80;
+
+
+
+    location / {
+
+        proxy_pass http://app_servers;
+
+        proxy_set_header Host $host;
+
+        proxy_set_header X-Real-IP $remote_addr;
+
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+    }
+
+}
+
+#Tested and restarted Nginx:
+
+sudo nginx -t
+
+sudo systemctl restart nginx
+
+#Validated setup:
+
+curl -I http://stlb01
+
+#✅ Response: HTTP/1.1 200 OK
+
+```
+
+**Takeaway:**
+- Never assume backend ports; always verify before configuring your load balancer. A correct upstream configuration ensures seamless traffic distribution, improves availability, and prevents 502 errors during load-balancing setups.
+
+- Load balancing may sound simple, but small syntax or structural errors (like misplaced braces or wrong ports) can break your setup; precision is everything in production environments.
+
+
+
+---
+
+### ⏳ Day 17 – \[Task Title Here]
 
 **Task:**
 *Description of the task goes here.*
@@ -624,8 +703,8 @@ curl http://localhost:3003
 * [x] Day 11 - Install and Configure Tomcat Server
 * [x] Day 13 - IPtables Installation and Configuration
 * [x] Day 14 - Linux Process Troubleshooting
-* [ ] Day 15 -
-* [ ] Day 16 -
+* [x] Day 15 - Setup SSL for Nginx
+* [x] Day 16 - Installing and Configuring Nginx as a Load Balancer
 * [ ] Day 17 -
 * [ ] Day 100 – 🎉
 
